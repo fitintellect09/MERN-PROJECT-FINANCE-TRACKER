@@ -20,7 +20,7 @@ const FrontPage = () => {
   useEffect(() => {
     const fetchBudgetAndExpenses = async () => {
       try {
-        const userRes = await axios.get("https://mern-project-finance-tracker-backend.onrender.com/api/finance/budget", {
+        const userRes = await axios.get("http://localhost:5000/api/finance/budget", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const userBudget = userRes.data.budget;
@@ -29,7 +29,7 @@ const FrontPage = () => {
           setHasBudget(true);
         }
 
-        const expenseRes = await axios.get(`https://mern-project-finance-tracker-backend.onrender.com/api/finance/all?userId=${userId}`, {
+        const expenseRes = await axios.get(`http://localhost:5000/api/finance/all?userId=${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setExpenses(expenseRes.data);
@@ -46,7 +46,7 @@ const FrontPage = () => {
     try {
       const cleanBudget = parseInt(budget.toString().replace(/^0+/, ""), 10);
       const res = await axios.post(
-        "https://mern-project-finance-tracker-backend.onrender.com/api/finance/budget",
+        "http://localhost:5000/api/finance/budget",
         { budget: cleanBudget },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -65,7 +65,7 @@ const FrontPage = () => {
         userId,
         date: new Date().toISOString(),
       };
-      const res = await axios.post("https://mern-project-finance-tracker-backend.onrender.com/api/finance/add", expenseWithDate, {
+      const res = await axios.post("http://localhost:5000/api/finance/add", expenseWithDate, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setExpenses([...expenses, res.data]);
@@ -86,7 +86,7 @@ const FrontPage = () => {
   const confirm = window.confirm("Are you sure you want to reset everything?");
   if (confirm) {
     try {
-      await axios.delete("https://mern-project-finance-tracker-backend.onrender.com/api/finance/reset", {
+      await axios.delete("http://localhost:5000/api/finance/reset", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
