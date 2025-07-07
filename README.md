@@ -40,5 +40,5 @@ A full-stack finance tracker web application built using the **MERN stack**. It 
 
 ---
 
-## 📁 Project Structure
+
 
